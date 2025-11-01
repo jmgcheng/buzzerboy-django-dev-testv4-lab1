@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title">All Restaurants</h4>
+                <div>
+                    <a href="{% url 'restaurant-create' %}" class="btn btn-primary btn-sm">Create New</a>
+                </div>
+              </div>
+              <div class="card-body">
+                {% if restaurants %}
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Cuisine
+                                </th>
+                                <th>
+                                    Capacity
+                                </th>
+                                <th class="text-right">
+                                    Status
+                                </th>
+                            </thead>
+
+                            <tbody>
+                                {% for restaurant in restaurants %}
+
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'restaurant-detail' restaurant.id %}">{{restaurant.name}}</a>
+                                        </td>
+                                        <td>
+                                            {{restaurant.cuisine.name}}
+                                        </td>
+                                        <td>
+                                            {{restaurant.capacity}}
+                                        </td>
+                                        <td class="text-right">
+                                            {{restaurant.status}}
+                                        </td>
+                                    </tr>    
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                {% else %}
+
+                    <div>
+                        <p>
+                            No Restaurants yet... <a href="{% url 'restaurant-create' %}">Create now!</a>
+                        </p>
+                    </div>
+
+                {% endif %}
+
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+{% endblock %}

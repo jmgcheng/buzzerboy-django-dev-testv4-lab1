@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><b>Restaurant:</b> {{restaurant.name}}</h5>
+                <p class="card-category">
+                  Cuisine <span class="text-info">{{restaurant.cuisine.name}}</span>. Status <span class="text-info">{{restaurant.status}}</span>
+                </p>
+                <hr>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card card-plain">
+                      <!-- <div class="card-header">
+                        <h5 class="card-title">Notifications Style</h5>
+                      </div> -->
+                      <div class="card-body">
+                        <p>
+                          <b>Establish Date:</b> {{restaurant.establish_date}}
+                          <br>
+                          <b>Seat Capacity:</b> {{restaurant.capacity}}
+                        </p>
+                        <p>
+                          <b>Address:</b> <br> {{restaurant.address}}
+                        </p>
+                        <p>
+                          <a href="{% url 'restaurant-update' restaurant.id %}" class="btn">
+                            Edit
+                          </a>
+                          <button class="btn btn-danger"
+                                  data-toggle="delete-modal"
+                                  data-url="{% url 'restaurant-delete' restaurant.pk %}"
+                                  data-item="{{ restaurant.name }}">
+                            Delete Restaurant
+                          </button>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="card card-plain">
+                      <div class="card-header d-flex align-items-center">
+                        <h5 class="card-title mr-2"><b>Menus</b></h5>
+                        <div>
+                          <a href="{% url 'restaurant-menu-create' restaurant.id %}" class="btn-outline-primary btn-sm">Add Menu</a>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                      {% if menus %}
+                        <ul>
+                          {% for menu in menus %}
+                            <li>
+                              <a href="{% url 'restaurant-menu-detail' restaurant.id menu.id %}">
+                                {{menu.name}} | {{menu.menu_type}} | {{menu.price}}
+                              </a>
+                              <button class="btn btn-danger btn-sm"
+                                      data-toggle="delete-modal"
+                                      data-url="{% url 'restaurant-menu-delete' restaurant.pk menu.pk %}"
+                                      data-item="menu '{{ menu.name }}'">
+                                Delete Menu
+                              </button>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        <p>
+                          No menus yet. <a href="{% url 'restaurant-menu-create' restaurant.id %}">Create Now.</a>
+                        </p>
+                      {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+{% endblock %}

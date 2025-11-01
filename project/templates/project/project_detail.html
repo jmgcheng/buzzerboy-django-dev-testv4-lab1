@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><b>Project:</b> {{project.title}}</h5>
+                <p class="card-category">
+                  Category <span class="text-info">{{project.category.name}}</span>. Status <span class="text-info">{{project.status}}</span>
+                </p>
+                <hr>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card card-plain">
+                      <!-- <div class="card-header">
+                        <h5 class="card-title">Notifications Style</h5>
+                      </div> -->
+                      <div class="card-body">
+                        <p>
+                          <b>Created On:</b> {{project.created_at}}
+                          <br>
+                          <b>Updated On:</b> {{project.updated_at}}
+                        </p>
+                        <p>
+                          <b>Description:</b> <br> {{project.description}}
+                        </p>
+                        <p>
+                          <a href="{% url 'project-update' project.id %}" class="btn">
+                            Edit
+                          </a>
+                          <button class="btn btn-danger"
+                                  data-toggle="delete-modal"
+                                  data-url="{% url 'project-delete' project.pk %}"
+                                  data-item="{{ project.title }}">
+                            Delete Project
+                          </button>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="card card-plain">
+                      <div class="card-header d-flex align-items-center">
+                        <h5 class="card-title mr-2"><b>Tasks</b></h5>
+                        <div>
+                          <a href="{% url 'project-task-create' project.id %}" class="btn-outline-primary btn-sm">Add Task</a>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                      {% if tasks %}
+                        <ul>
+                          {% for task in tasks %}
+                            <li>
+                              <a href="{% url 'project-task-detail' project.id task.id %}">
+                                {{task.name}} | {{task.priority}} | {{task.status}}
+                                {% if task.due_date %}
+                                  | Due Date: {{task.due_date}}
+                                {% endif %}
+                              </a>
+                              <button class="btn btn-danger btn-sm"
+                                      data-toggle="delete-modal"
+                                      data-url="{% url 'project-task-delete' project.pk task.pk %}"
+                                      data-item="task '{{ task.title }}'">
+                                Delete Task
+                              </button>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        <p>
+                          No tasks yet. <a href="{% url 'project-task-create' project.id %}">Create Now.</a>
+                        </p>
+                      {% endif %}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+{% endblock %}

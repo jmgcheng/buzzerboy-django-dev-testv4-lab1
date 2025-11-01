@@ -1,14 +1,23 @@
 from django.db import models
 
 
-class RestaurantCuisine(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
+# class RestaurantCuisine(models.Model):
+#     name = models.CharField(max_length=100, unique=True)
+# 
+#     def __str__(self):
+#         return self.name
 
 
 class Restaurant(models.Model):
+    CUISINE_CHOICES = [
+        ('FILIPINO', 'Filipino'),
+        ('JAPANESE', 'Japanese'),
+        ('ITALIAN', 'Italian'),
+        ('AMERICAN', 'American'),
+        ('CHINESE', 'Chinese'),
+        ('OTHER', 'Other'),
+    ]
+
     STATUS_CHOICES = [
         ('OPERATIONAL', 'Operational'),
         ('CLOSED', 'Closed'),
@@ -18,7 +27,8 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=200, unique=True)
     address = models.TextField()
     establish_date = models.DateField()
-    cuisine = models.ForeignKey(RestaurantCuisine, on_delete=models.SET_NULL, null=True, blank=True)
+    # cuisine = models.ForeignKey(RestaurantCuisine, on_delete=models.SET_NULL, null=True, blank=True)
+    cuisine = models.CharField(max_length=50, choices=CUISINE_CHOICES, default='OTHER')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='OPERATIONAL')
     capacity = models.IntegerField(default=50)
 

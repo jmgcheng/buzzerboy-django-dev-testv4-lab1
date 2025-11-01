@@ -41,7 +41,7 @@
                                             <a href="{% url 'project-detail' project.id %}">{{project.title}}</a>
                                         </td>
                                         <td>
-                                            {{project.category.name}}
+                                            {{project.category}}
                                         </td>
                                         <td>
                                             {{project.updated_at}}
@@ -109,7 +109,7 @@
                                             <a href="{% url 'restaurant-detail' restaurant.id %}">{{restaurant.name}}</a>
                                         </td>
                                         <td>
-                                            {{restaurant.cuisine.name}}
+                                            {{restaurant.cuisine}}
                                         </td>
                                         <td>
                                             {{restaurant.capacity}}

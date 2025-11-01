@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from restaurant.models import Restaurant, RestaurantCuisine, RestaurantMenu
+from restaurant.models import Restaurant, RestaurantMenu
 from restaurant.forms import RestaurantForm, RestaurantMenuForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
 
 def restaurant_list(request):
-    restaurants = Restaurant.objects.all()
+    restaurants = Restaurant.objects.all().order_by('-establish_date')
     data = {
         'page_title': 'Restaurants',
         'restaurants': restaurants,

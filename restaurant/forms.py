@@ -1,10 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from restaurant.models import RestaurantCuisine, Restaurant, RestaurantMenu
+from restaurant.models import Restaurant, RestaurantMenu
 
 
 class RestaurantForm(forms.ModelForm):
-    cuisine = forms.ModelChoiceField(queryset=RestaurantCuisine.objects.all(), required=True)
+    # cuisine = forms.ModelChoiceField(queryset=RestaurantCuisine.objects.all(), required=True)
     class Meta:
         model = Restaurant
         fields = ['name', 'address', 'establish_date', 'cuisine', 'capacity', 'status']

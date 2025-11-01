@@ -1,10 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from project.models import ProjectCategory, Project, ProjectTask
+from project.models import Project, ProjectTask
 
 
 class ProjectForm(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=ProjectCategory.objects.all(), required=True)
+    # category = forms.ModelChoiceField(queryset=ProjectCategory.objects.all(), required=True)
     class Meta:
         model = Project
         fields = ['title', 'description', 'category', 'created_at']

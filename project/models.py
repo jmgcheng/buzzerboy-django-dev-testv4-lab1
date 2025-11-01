@@ -2,14 +2,22 @@ from django.db import models
 from django.utils.timezone import now
 
 
-class ProjectCategory(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
+# class ProjectCategory(models.Model):
+#     name = models.CharField(max_length=100, unique=True)
+# 
+#     def __str__(self):
+#         return self.name
 
 
 class Project(models.Model):
+    CATEGORY_CHOICES = [
+        ('WEB', 'Web Development'),
+        ('MOBILE', 'Mobile App'),
+        ('DATA', 'Data Science'),
+        ('AI', 'Artificial Intelligence'),
+        ('OTHER', 'Other'),
+    ]
+
     STATUS_CHOICES = [
         ('OPEN', 'Open'),
         ('IN_PROGRESS', 'In Progress'),
@@ -18,7 +26,8 @@ class Project(models.Model):
 
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
-    category = models.ForeignKey(ProjectCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    # category = models.ForeignKey(ProjectCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='OTHER')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='OPEN')
     created_at = models.DateTimeField(default=now)
     updated_at = models.DateTimeField(auto_now=True)

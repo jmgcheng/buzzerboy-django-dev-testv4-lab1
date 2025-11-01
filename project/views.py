@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from project.models import Project, ProjectCategory, ProjectTask
+from project.models import Project, ProjectTask
 from project.forms import ProjectForm, ProjectTaskForm
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
 
 def project_list(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-created_at')
     data = {
         'page_title': 'Projects',
         'projects': projects,

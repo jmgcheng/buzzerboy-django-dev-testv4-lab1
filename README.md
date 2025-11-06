@@ -17,6 +17,7 @@ cd buzzerboy-django-dev-testv4-lab1
 ```
 python -m venv venv
 venv\Scripts\activate
+pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 ```
